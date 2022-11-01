@@ -1,0 +1,49 @@
+drop table batch_setting ;
+create table batch_setting(
+	id SERIAL primary key
+	, setting_name varchar(100)
+	, setting_description varchar(100)
+	, setting_type varchar(100)
+	, use_yn varchar(1)
+	, created_by varchar(100)
+	, created_at date
+	, last_updated_by varchar(100)
+	, last_updated_at date
+);
+
+comment on table batch_setting is 						'모니터링 기준 테이블';
+
+comment on column batch_setting.id is 					'배치세팅ID';
+comment on column batch_setting.setting_name is 		'모니터링 항목';
+comment on column batch_setting.setting_description is 	'모니터링 항목 별 주석';
+comment on column batch_setting.setting_type is 		'모니터링 타입(TABLEAU, PORTAL)';
+comment on column batch_setting.use_yn is 				'모니터링 사용유무';
+comment on column batch_setting.created_by is 			'최초생성자';
+comment on column batch_setting.created_at is 			'최초생성시각';
+comment on column batch_setting.last_updated_by is 		'최종수정자';
+comment on column batch_setting.last_updated_at is 		'최종수정시각';
+
+
+
+drop table batch_setting_detail ;
+create table batch_setting_detail(
+	id SERIAL primary key
+	, task_id varchar(100)
+	, setting_id bigint
+	, use_yn varchar(1)
+	, created_by varchar(100)
+	, created_at date
+	, last_updated_by varchar(100)
+	, last_updated_at date
+);
+
+comment on table batch_setting_detail is 					'모니터링 기준에 묶일 하위 태블로잡/포탈배치';
+
+comment on column batch_setting_detail.id is 				'배치세팅상세ID';
+comment on column batch_setting_detail.task_id is 			'태블로잡/포탈배치 아이디';
+comment on column batch_setting_detail.setting_id is 		'FK) 배치세팅ID';
+comment on column batch_setting_detail.use_yn is 			'태블로잡/포탈배치 사용유무';
+comment on column batch_setting_detail.created_by is 		'최초생성자';
+comment on column batch_setting_detail.created_at is 		'최초생성시각';
+comment on column batch_setting_detail.last_updated_by is 	'최종수정자';
+comment on column batch_setting_detail.last_updated_at is 	'최종수정시각';
